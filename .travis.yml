@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t francescobiegi/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t mistre83/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run francescobiegi/react-test npm run test -- --coverage
+  - docker run mistre83/react-test npm run test -- --coverage
 
 after_success:
-  - docker build -t francescobiegi/multi-client ./client
-  - docker build -t francescobiegi/multi-nginx ./nginx
-  - docker build -t francescobiegi/multi-server ./server
-  - docker build -t francescobiegi/multi-worker ./worker
+  - docker build -t mistre83/multi-client ./client
+  - docker build -t mistre83/multi-nginx ./nginx
+  - docker build -t mistre83/multi-server ./server
+  - docker build -t mistre83/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push francescobiegi/multi-client
-  - docker push francescobiegi/multi-nginx
-  - docker push francescobiegi/multi-server
-  - docker push francescobiegi/multi-worker
+  - docker push mistre83/multi-client
+  - docker push mistre83/multi-nginx
+  - docker push mistre83/multi-server
+  - docker push mistre83/multi-worker
